@@ -1,0 +1,42 @@
+.qlnv-title
+{
+	font-family:arial;
+	text-align: center;
+	margin-bottom: 40px;
+}
+.qlnv-control div
+{
+	margin: 30px 0 20px 0;
+}
+.qlnv-search
+{
+	position: relative;
+}
+.qlnv-search span
+{
+	left:5px;
+	position: absolute;
+	z-index:1;
+	top:10px;
+}
+.qlnv-search input
+{
+	padding-left: 20px;
+}
+.table tbody tr td
+{
+	line-height:2;
+}
+.headerTable{
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.color-blue
+{
+	color:#337AB7;
+}
+.form-group label
+{
+	text-align:right;
+}

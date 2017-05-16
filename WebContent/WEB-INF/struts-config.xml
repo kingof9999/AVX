@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts 
+Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="stokForm" type="form.StokForm"></form-bean>
+	</form-beans>
+	<action-mappings>
+		<action path="/search-J1JR" name="stokForm" 
+			scope="request" type="action.GetInfoStokAction">
+			
+			<forward name="loi" path="/error.jsp"/>
+			<forward name="thanhCong" path="/updateJ1JR.jsp"/>
+		</action>
+		<action path="/update-J1JR" name="stokForm" 
+			scope="request" type="action.UpdateStokAction">
+			
+			<forward name="loi" path="/error.jsp"/>
+			<forward name="thanhCong" path="/updateJ1JR.jsp"/>
+		</action>
+	</action-mappings>
+	<message-resources parameter="action.ApplicationResources" />
+</struts-config>
