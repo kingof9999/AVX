@@ -10,6 +10,7 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 			scope="request" type="action.GetInfoStokAction">
 			
 			<forward name="loi" path="/error.jsp"/>
+			<forward name="upDate" path="/updateJ1JR.jsp"/>
 			<forward name="thanhCong" path="/updateJ1JR.jsp"/>
 		</action>
 		<action input="/updateJ1JR.jsp" path="/update-J1JR" name="stokForm" 

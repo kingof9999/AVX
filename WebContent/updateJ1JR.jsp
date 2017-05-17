@@ -88,7 +88,7 @@
 				</div>
 				<html:form action="/search-J1JR" styleClass="form-group" method="post">
 				<div class="top-message col-sm-12">
-					<label style="color: red;margin-left: 50px;"><<< エラーメッセージ >>></label>
+					<label id="message" style="color: red;margin-left: 50px;"><html:errors property="nullStokError"/></label>
 				</div>
 				<div class="body-filter col-sm-12" style="height: 80px;">
 					<div style="margin: 24px 0 0 50px;">
@@ -107,7 +107,7 @@
 				<div class="body-button col-sm-12">
 					<div style="margin: 10px 0 0 83%;">
 						<html:submit styleClass="m-btn m-btn-success my-btn" style="width: 69px;height: 34px;">検索(S)</html:submit>
-						<input type="reset" class="m-btn m-btn-success my-btn" style="width: 110px;height: 34px;" value="'キャンセル(C)"/>
+						<input type="reset" class="m-btn m-btn-success my-btn" style="width: 110px;height: 34px;" onclick="location.href='updateJ1JR.jsp';" value="'キャンセル(C)"/>
 					</div>
 				</div>
 				</html:form>
@@ -121,13 +121,13 @@
 						<button class="m-btn m-btn-success my-btn">表示</button>
 					</div>
 				</div>
-				<html:form action="/update-J1JR" styleClass="form-group" method="post">
+				<html:form styleId="infoForm" action="/update-J1JR" styleClass="form-group" method="post">
 				<div class="body-main col-sm-12">
 					<div style="margin: 24px 0 0 50px;">
 						<table>
 							<tr>
 								<td class="body-main-label">
-									<div class="body-main-label-text"><label class="my-label2">ストック・ナンバー</label></div>
+									<div class="body-main-label-text"><label class="my-label2"> ストック・ナンバー</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
 									<html:text property="iTEMMSTOK" styleClass="form-control" style="width: 20%;" disabled="true"></html:text>
@@ -201,7 +201,9 @@
 								<td class="body-main-label">
 									<div class="body-main-label-text"><label class="my-label2">修正前・車種名</label></div>
 								</td>
-								<td style="padding-left: 20px;width: 87%;"><input class="form-control" type="text" style="width: 15%;" value="N(10)" disabled="true">check</td>
+								<td style="padding-left: 20px;width: 87%;">
+									<html:text property="cARNMNAME" styleClass="form-control" style="width: 15%;" disabled="true"></html:text>
+								</td>
 							</tr>
 							<tr>
 								<td class="body-main-label">
@@ -245,4 +247,16 @@
 		</div>
 	</div>
 </body>
+<script>
+	$( document ).ready(function() {
+		var message = $("#message").text();
+		var x = document.getElementById('infoForm');
+		if(message.length == 0){
+			x.style.display = 'block';
+		}
+		if(message.length > 0){
+			x.style.display = 'none';
+		}
+	});
+</script>
 </html>

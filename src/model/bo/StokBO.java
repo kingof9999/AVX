@@ -14,4 +14,8 @@ public class StokBO {
 		return stokDAO.checkITEMMMKCD(iTEMMSTOK);
 	}
 
+	public Stok checkITEMMSYCD(String iTEMMSTOK) throws Exception {
+		return stokDAO.checkITEMMSYCD(iTEMMSTOK);
+	}
+
 }

@@ -20,7 +20,7 @@ public class StokDAO {
 						+" FROM AUTITEMM, AUTEMPFL, AUTDCCFL"
 						+" WHERE AUTEMPFL.EMPFL_EMPNO = AUTITEMM.ITEMM_STOK"
 						+" 	AND AUTDCCFL.DCCFL_DCCD1 = AUTITEMM.ITEMM_STOK"
-						+" 	AND ITEMM_STOK LIKE '1'"
+						+" 	AND ITEMM_STOK LIKE '%s'"
 						+" 	AND (ITEMM_HNKB = 0 OR ITEMM_HNKB = 1)", iTEMMSTOK);
 		ResultSet rs;
 		//catch error and throw
@@ -36,7 +36,7 @@ public class StokDAO {
 			//check delete have action
 			if(rs.next()){
 				stok = new Stok();
-				stok.setiTEMMSTOK(iTEMMSTOK);
+				stok.setiTEMMSTOK(rs.getString("ITEMM_STOK"));
 				stok.setiTEMMSKCD(rs.getString("ITEMM_SKCD"));
 				stok.setiTEMMTNTO(rs.getString("ITEMM_TNTO1")+rs.getString("ITEMM_TNTO2"));
 				stok.seteMPFLEMPNM(rs.getString("EMPFL_EMPNM"));
@@ -60,7 +60,7 @@ public class StokDAO {
 		String sql = String
 				.format("SELECT m.MAKER_DATA"
 						+" FROM AUTITEMM i"
-						+" INNER JOIN AUTMAKER m ON i.ITEMM_STOK = '%s' AND i.ITEMM_STOK = m.MAKER_ID", iTEMMSTOK);
+						+" INNER JOIN AUTMAKER m ON i.ITEMM_STOK = '%s' AND i.ITEMM_MKCD = m.MAKER_ID", iTEMMSTOK);
 		ResultSet rs;
 		//catch error and throw
 		try {
@@ -79,6 +79,39 @@ public class StokDAO {
 			}else{
 				//set "指定無し"  to Stok(mAKERDATA) Bean
 				stok.setmAKERDATA("指定無し");
+			}
+		} catch (Exception e) {
+			throw new Exception("Error occur: "+e.getMessage());
+		} finally {
+			DBConnection.disConnect();
+		}
+		return stok;
+	}
+
+	public Stok checkITEMMSYCD(String iTEMMSTOK) throws Exception {
+		//select data from table PUBLIC_CALENDAR
+		String sql = String
+				.format("SELECT c.CARNM_NAME"
+						+" FROM AUTITEMM i"
+						+" INNER JOIN AUTCARNM c ON i.ITEMM_STOK = '%s' AND i.ITEMM_STOK = c.CARNM_SHSYCD", iTEMMSTOK);
+		ResultSet rs;
+		//catch error and throw
+		try {
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+		} catch (Exception e) {
+			//throw exception if error
+			throw new Exception("Error occur: "+e.getMessage());
+		}
+		Stok stok = new Stok();
+		try {
+			//check delete have action
+			if(rs.next()){
+				//set MAKER_DATA to Stok(mAKERDATA) Bean 
+				stok.setcARNMNAME(rs.getString("CARNM_NAME"));
+			}else{
+				//set "指定無し"  to Stok(mAKERDATA) Bean
+				stok.setcARNMNAME("指定無し");
 			}
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
