@@ -18,4 +18,12 @@ public class StokBO {
 		return stokDAO.checkITEMMSYCD(iTEMMSTOK);
 	}
 
+	public boolean isExistITEMMSKCD(String iTEMMSTOK, String iTEMMSKCD) throws Exception {
+		return stokDAO.isExistITEMMSKCD(iTEMMSTOK,iTEMMSKCD);
+	}
+
+	public void updateInfoStok(String iTEMMSTOK, String iTEMMSKCD) throws Exception {
+		stokDAO.updateInfoStok(iTEMMSTOK,iTEMMSKCD);
+	}
+
 }

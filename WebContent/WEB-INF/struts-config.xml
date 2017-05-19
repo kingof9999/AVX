@@ -16,8 +16,9 @@ Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 		<action input="/updateJ1JR.jsp" path="/update-J1JR" name="stokForm" 
 			scope="request" type="action.UpdateStokAction">
 			
+			<forward name="upDate" path="/updateJ1JR.jsp"/>
 			<forward name="loi" path="/error.jsp"/>
-			<forward name="thanhCong" path="/updateJ1JR.jsp"/>
+			<forward name="thanhCong" path="/search-J1JR.do"/>
 		</action>
 	</action-mappings>
 	<message-resources parameter="action.ApplicationResources" />

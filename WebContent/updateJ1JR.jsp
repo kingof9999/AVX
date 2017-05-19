@@ -89,6 +89,10 @@
 				<html:form action="/search-J1JR" styleClass="form-group" method="post">
 				<div class="top-message col-sm-12">
 					<label id="message" style="color: red;margin-left: 50px;"><html:errors property="nullStokError"/></label>
+					<label style="color: red;margin-left: 50px;">
+						<html:errors property="reloadPageError"/>
+						<html:errors property="updateSuccess"/>
+					</label>
 				</div>
 				<div class="body-filter col-sm-12" style="height: 80px;">
 					<div style="margin: 24px 0 0 50px;">
@@ -130,7 +134,7 @@
 									<div class="body-main-label-text"><label class="my-label2"> ストック・ナンバー</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMSTOK" styleClass="form-control" style="width: 20%;" disabled="true"></html:text>
+									<html:text property="iTEMMSTOK" styleClass="form-control" style="width: 20%;" readonly="true" maxlength="14"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -138,7 +142,11 @@
 									<div class="body-main-label-text"><label class="my-label2">主保管地コード</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMSKCD" styleClass="form-control" style="width: 5%;"></html:text>
+									<html:text property="iTEMMSKCD" styleClass="form-control" style="width: 5%;" maxlength="2"></html:text>
+									<label style="color: red;">
+										<html:errors property="updateHalfSizeError"/>
+										<html:errors property="existError"/>
+									</label>
 								</td>
 							</tr>
 							<tr>
@@ -146,7 +154,7 @@
 									<div class="body-main-label-text"><label class="my-label2">担当者コード</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMTNTO" styleClass="form-control" style="width: 5%;" disabled="true"></html:text>
+									<html:text property="iTEMMTNTO" styleClass="form-control" style="width: 5%;" readonly="true" maxlength="2"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -154,7 +162,7 @@
 									<div class="body-main-label-text"><label class="my-label2">氏名・通名</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="eMPFLEMPNM" styleClass="form-control" style="width: 8%;" disabled="true"></html:text>
+									<html:text property="eMPFLEMPNM" styleClass="form-control" style="width: 8%;" readonly="true"  maxlength="5"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -162,7 +170,7 @@
 									<div class="body-main-label-text"><label class="my-label2">ＤＣＣ名称</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="dCCFLNAME" styleClass="form-control" style="width: 37%;" disabled="true"></html:text>
+									<html:text property="dCCFLNAME" styleClass="form-control" style="width: 37%;" readonly="true" maxlength="25"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -170,7 +178,7 @@
 									<div class="body-main-label-text"><label class="my-label2">修正前・品名</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMHNME" styleClass="form-control" style="width: 37%;" disabled="true"></html:text>
+									<html:text property="iTEMMHNME" styleClass="form-control" style="width: 37%;" readonly="true" maxlength="25"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -178,7 +186,7 @@
 									<div class="body-main-label-text"><label class="my-label2">修正後・品名</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMHNME" styleClass="form-control" style="width: 37%;" disabled="true"></html:text>
+									<html:text property="iTEMMHNME" styleClass="form-control" style="width: 37%;" readonly="true" maxlength="25"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -186,7 +194,7 @@
 									<div class="body-main-label-text"><label class="my-label2">修正前メーカー名</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="mAKERDATA" styleClass="form-control" style="width: 10%;" disabled="true"></html:text>
+									<html:text property="mAKERDATA" styleClass="form-control" style="width: 10%;" readonly="true" maxlength="6"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -194,7 +202,7 @@
 									<div class="body-main-label-text"><label class="my-label2">修正後ﾒｰｶｰ・コード</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMMKCD" styleClass="form-control" style="width: 5%;" disabled="true"></html:text>
+									<html:text property="iTEMMMKCD" styleClass="form-control" style="width: 5%;" readonly="true" maxlength="2"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -202,7 +210,7 @@
 									<div class="body-main-label-text"><label class="my-label2">修正前・車種名</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="cARNMNAME" styleClass="form-control" style="width: 15%;" disabled="true"></html:text>
+									<html:text property="cARNMNAME" styleClass="form-control" style="width: 15%;" readonly="true" maxlength="10"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -210,7 +218,7 @@
 									<div class="body-main-label-text"><label class="my-label2">修正後車種コード</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMSYCD" styleClass="form-control" style="width: 4%;" disabled="true"></html:text>
+									<html:text property="iTEMMSYCD" styleClass="form-control" style="width: 4%;" readonly="true" maxlength="1"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -218,7 +226,7 @@
 									<div class="body-main-label-text"><label class="my-label2">ﾛｯﾄ別単価適用ﾏｰｸ</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMTNKMK" styleClass="form-control" style="width: 4%;" disabled="true"></html:text>
+									<html:text property="iTEMMTNKMK" styleClass="form-control" style="width: 4%;" readonly="true" maxlength="1"></html:text>
 								</td>
 							</tr>
 							<tr>
@@ -226,7 +234,7 @@
 									<div class="body-main-label-text"><label class="my-label2">ﾊﾟｰﾂ化年度（ﾗｲﾝ=0）</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMPART" styleClass="form-control" style="width: 7%;text-align-last: end;" disabled="true"></html:text>
+									<html:text property="iTEMMPART" styleClass="form-control" style="width: 7%;text-align-last: end;" readonly="true" maxlength="4"></html:text>
 								</td>
 							</tr>
 						</table>

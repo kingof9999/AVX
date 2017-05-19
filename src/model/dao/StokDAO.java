@@ -14,18 +14,19 @@ public class StokDAO {
 	Statement stmt;
 	
 	public Stok getInfoStok(String iTEMMSTOK) throws Exception {
-		//select data from table PUBLIC_CALENDAR
+		//select data from table AUTITEMM, AUTEMPFL, AUTDCCFL
 		String sql = String
 				.format("SELECT AUTITEMM.*, AUTEMPFL.EMPFL_EMPNM, AUTDCCFL.DCCFL_NAME"
 						+" FROM AUTITEMM, AUTEMPFL, AUTDCCFL"
-						+" WHERE AUTEMPFL.EMPFL_EMPNO = AUTITEMM.ITEMM_STOK"
-						+" 	AND AUTDCCFL.DCCFL_DCCD1 = AUTITEMM.ITEMM_STOK"
+						+" WHERE AUTEMPFL.EMPFL_EMPNO = AUTITEMM.ITEMM_EMPNO"
+						+" 	AND AUTDCCFL.DCCFL_DCCD1 = AUTITEMM.ITEMM_DCCD1"
 						+" 	AND ITEMM_STOK LIKE '%s'"
 						+" 	AND (ITEMM_HNKB = 0 OR ITEMM_HNKB = 1)", iTEMMSTOK);
 		ResultSet rs;
+		Statement stmt = null;
 		//catch error and throw
 		try {
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 		} catch (Exception e) {
 			//throw exception if error
@@ -33,9 +34,10 @@ public class StokDAO {
 		}
 		Stok stok = null;
 		try {
-			//check delete have action
+			//check exist in database
 			if(rs.next()){
 				stok = new Stok();
+				//set all element to Stok Bean
 				stok.setiTEMMSTOK(rs.getString("ITEMM_STOK"));
 				stok.setiTEMMSKCD(rs.getString("ITEMM_SKCD"));
 				stok.setiTEMMTNTO(rs.getString("ITEMM_TNTO1")+rs.getString("ITEMM_TNTO2"));
@@ -50,21 +52,24 @@ public class StokDAO {
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
 		} finally {
+			rs.close();
+			stmt.close();
 			DBConnection.disConnect();
 		}
 		return stok;
 	}
 
 	public Stok checkITEMMMKCD(String iTEMMSTOK) throws Exception {
-		//select data from table PUBLIC_CALENDAR
+		//select data from table AUTITEMM
 		String sql = String
 				.format("SELECT m.MAKER_DATA"
 						+" FROM AUTITEMM i"
 						+" INNER JOIN AUTMAKER m ON i.ITEMM_STOK = '%s' AND i.ITEMM_MKCD = m.MAKER_ID", iTEMMSTOK);
 		ResultSet rs;
+		Statement stmt = null;
 		//catch error and throw
 		try {
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 		} catch (Exception e) {
 			//throw exception if error
@@ -72,7 +77,7 @@ public class StokDAO {
 		}
 		Stok stok = new Stok();
 		try {
-			//check delete have action
+			//check exist in database
 			if(rs.next()){
 				//set MAKER_DATA to Stok(mAKERDATA) Bean 
 				stok.setmAKERDATA(rs.getString("MAKER_DATA"));
@@ -83,21 +88,24 @@ public class StokDAO {
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
 		} finally {
+			rs.close();	
+			stmt.close();
 			DBConnection.disConnect();
 		}
 		return stok;
 	}
 
 	public Stok checkITEMMSYCD(String iTEMMSTOK) throws Exception {
-		//select data from table PUBLIC_CALENDAR
+		//select data from table AUTITEMM
 		String sql = String
 				.format("SELECT c.CARNM_NAME"
 						+" FROM AUTITEMM i"
-						+" INNER JOIN AUTCARNM c ON i.ITEMM_STOK = '%s' AND i.ITEMM_STOK = c.CARNM_SHSYCD", iTEMMSTOK);
+						+" INNER JOIN AUTCARNM c ON i.ITEMM_STOK = '%s' AND i.ITEMM_SYCD = c.CARNM_SHSYCD", iTEMMSTOK);
 		ResultSet rs;
+		Statement stmt = null;
 		//catch error and throw
 		try {
-			Statement stmt = conn.createStatement();
+			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 		} catch (Exception e) {
 			//throw exception if error
@@ -105,7 +113,7 @@ public class StokDAO {
 		}
 		Stok stok = new Stok();
 		try {
-			//check delete have action
+			//check exist in database
 			if(rs.next()){
 				//set MAKER_DATA to Stok(mAKERDATA) Bean 
 				stok.setcARNMNAME(rs.getString("CARNM_NAME"));
@@ -116,8 +124,62 @@ public class StokDAO {
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
 		} finally {
+			rs.close();
+			stmt.close();
 			DBConnection.disConnect();
 		}
 		return stok;
+	}
+
+	public boolean isExistITEMMSKCD(String iTEMMSTOK, String iTEMMSKCD) throws Exception {
+		//select data from table AUTITEMM
+		String sql = String
+				.format("SELECT ITEMM_STOK"
+						+" FROM AUTITEMM"
+						+" WHERE ITEMM_STOK LIKE '%s' AND ITEMM_SKCD = '%s'", iTEMMSTOK, iTEMMSKCD);
+		ResultSet rs;
+		Statement stmt = null;
+		//catch error and throw
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+		} catch (Exception e) {
+			//throw exception if error
+			throw new Exception("Error occur: "+e.getMessage());
+		}
+		try {
+			//check exist in database
+			if(rs.next()){
+				//return true if have
+				return true;
+			}else{
+				//return false if not
+				return false;
+			}
+		} catch (Exception e) {
+			throw new Exception("Error occur: "+e.getMessage());
+		} finally {
+			rs.close();
+			stmt.close();
+			DBConnection.disConnect();
+		}
+	}
+
+	public void updateInfoStok(String iTEMMSTOK, String iTEMMSKCD) throws Exception {
+		//insert data to table
+		String sql = String.format("UPDATE AUTITEMM SET ITEMM_SKCD = '%s' WHERE ITEMM_STOK = '%s'", iTEMMSKCD,iTEMMSTOK);
+		Statement stmt = null;
+		//catch error and throw
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+		} catch (Exception e) {
+			//throw exception if error
+			throw new Exception("Error occur: "+e.getMessage());
+		}
+		finally {
+			stmt.close();
+			DBConnection.disConnect();
+		}
 	}
 }

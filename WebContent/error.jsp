@@ -24,36 +24,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<link
-	href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css"
-	rel="stylesheet">
-<link
-	href="http://cdn.datatables.net/responsive/1.0.1/css/dataTables.responsive.css"
-	rel="stylesheet">
-<link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/myStyle.css" />
-<script src="js/jquery.min.js"></script>
-
-<!-- dataTable -->
-<script
-	src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-<script
-	src="http://cdn.datatables.net/responsive/1.0.1/js/dataTables.responsive.min.js"></script>
-<script
-	src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-<script
-	src="https://cdn.datatables.net/rowgroup/1.0.0/css/rowGroup.dataTables.min.css"></script>
-<script
-	src="https://cdn.datatables.net/rowgroup/1.0.0/js/dataTables.rowGroup.min.js"></script>
-<script>
-	function autoClick(){
-		document.getElementById('click').click();
-	}
-</script>
 <title>Error</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/quanlynhanvien.css" />
+<script src="js/jquery.min.js"></script>
 </head>
-<body onload="setTimeout('autoClick();', 3000);">
+<body>
 	<div class="container">
 		<div class="header">
 			<div class="header-top"></div>
@@ -82,14 +59,15 @@
 					</div>
 				</div>
 			</nav>
+			<div style="color: red;">
+				<label>Error :</label><br>
+				<label>
+					<html:errors property="dbError"/>
+					<html:errors property="sqlUpdateError"/>
+				</label>
+			</div>
 		</div>
 		<div class="body">
-			<center>
-				<span>Error :</span>
-			</center>
-			<center>
-				
-			</center>
 		</div>
 	</div>
 </body>
