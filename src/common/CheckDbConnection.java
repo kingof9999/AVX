@@ -23,10 +23,6 @@ public class CheckDbConnection {
 	 * @return
 	 */
 	public static boolean checkConnect(){
-		//check class DBConnection is null
-		if(DBConnection.getConnect() != null){
-			return true;
-		}
-		return false;
+		return DBConnection.getConnect() != null;
 	}
 }

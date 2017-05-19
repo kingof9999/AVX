@@ -19,6 +19,20 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/quanlynhanvien.css" />
 <script src="js/jquery.min.js"></script>
+<!-- script export to excel -->
+<script type="text/javascript">  
+	function exportF() {
+		var table = document.getElementById("table");
+		var html = table.outerHTML;
+
+		var url = 'data:application/vnd.ms-excel,' + encodeURI(html); // Set your html table into url 
+		var link = document.getElementById("downloadLink");
+		link.setAttribute("href", url);
+		link.setAttribute("download", "export.xls"); // Choose the file name
+		link.click(); // Download excel file   
+		return false;
+	}
+</script>
 </head>
 <body>
 	<div class="container">
@@ -102,7 +116,7 @@
 									<div class="body-main-label-text"><label class="my-label2">ストック・ナンバー</label></div>
 								</td>
 								<td style="padding-left: 20px;width: 87%;">
-									<html:text property="iTEMMSTOK" styleClass="form-control" style="width: 37%;"></html:text>
+									<html:text property="iTEMMSTOK" styleClass="form-control" style="width: 37%;" maxlength="13"></html:text>
 								</td>
 							</tr>
 						</table>
@@ -128,7 +142,7 @@
 				<html:form styleId="infoForm" action="/update-J1JR" styleClass="form-group" method="post">
 				<div class="body-main col-sm-12">
 					<div style="margin: 24px 0 0 50px;">
-						<table>
+						<table id="table">
 							<tr>
 								<td class="body-main-label">
 									<div class="body-main-label-text"><label class="my-label2"> ストック・ナンバー</label></div>
@@ -244,8 +258,9 @@
 				<div class="body-button col-sm-12">
 					<div style="margin: 10px 0 0 69%;">
 						<button class="m-btn m-btn-success my-btn" style="width: 69px;height: 34px;margin-left: 10px;">'更新(U)</button>
-						<input type="button" class="m-btn m-btn-success my-btn" style="width: 110px;height: 34px;margin-left: 10px;" value="'クリアー(R)"/>
-						<button class="m-btn m-btn-success my-btn" style="width: 120px;height: 34px;margin-left: 10px;">エクスポート(E)</button>
+						<input type="reset" class="m-btn m-btn-success my-btn" style="width: 110px;height: 34px;margin-left: 10px;" value="'クリアー(R)"/>
+						<a onclick="exportF()" class="m-btn m-btn-success my-btn" style="width: 120px;height: 34px;margin-left: 10px;">エクスポート(E)</a>
+						<a style="display: none" id="downloadLink"></a>
 					</div>
 				</div>
 				</html:form>

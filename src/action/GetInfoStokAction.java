@@ -40,13 +40,13 @@ public class GetInfoStokAction extends Action{
 		//call class AcyionErrors to use
 		ActionErrors actionErrors = new ActionErrors();
 		//check database connection
-		if(CheckDbConnection.checkConnect() == false){
+		if(!CheckDbConnection.checkConnect()){
 			//add message error
 			actionErrors.add("dbError", new ActionMessage("error.db.connectDatabase"));
 			saveErrors(request, actionErrors);
 			//return to error page
 			return mapping.findForward("loi");
-		}else{
+		} else {
 			//call class StokBO to use
 			StokBO stokBO = new StokBO();
 			//call class Stok to use
@@ -75,7 +75,7 @@ public class GetInfoStokAction extends Action{
 					saveErrors(request, actionErrors);
 					//return updateJ1JR.jsp
 					return mapping.findForward("upDate");
-				}else{
+				} else {
 					//add message error
 					actionErrors.add("sqlError", new ActionMessage("error.getStok.sqlError"));
 					saveErrors(request, actionErrors);

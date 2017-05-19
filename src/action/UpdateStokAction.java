@@ -25,13 +25,13 @@ public class UpdateStokAction extends Action{
 		//call class AcyionErrors to use
 		ActionErrors actionErrors = new ActionErrors();
 		//check database connection
-		if(CheckDbConnection.checkConnect() == false){
+		if(!CheckDbConnection.checkConnect()){
 			//add message error
 			actionErrors.add("dbError", new ActionMessage("error.db.connectDatabase"));
 			saveErrors(request, actionErrors);
 			//return to error page
 			return mapping.findForward("loi");
-		}else{
+		} else {
 			//call class common CheckData to use
 			CheckData checkData = new CheckData();
 			//call iTEMMSTOK from stokForm
@@ -51,13 +51,13 @@ public class UpdateStokAction extends Action{
 				return mapping.findForward("upDate");
 			}
 			//if else for checkSize
-			if(checkSize == true){
+			if(checkSize){
 				//add message error
 				actionErrors.add("updateHalfSizeError", new ActionMessage("error.update.halfsize"));
 				saveErrors(request, actionErrors);
 				//return to updateJ1JR.jsp
 				return mapping.findForward("upDate");
-			}else{
+			} else {
 				//call class StokBO to use
 				StokBO stokBO = new StokBO();
 				boolean checkExist;
@@ -73,13 +73,13 @@ public class UpdateStokAction extends Action{
 					return mapping.findForward("loi");
 				}
 				//check exist iTEMMSKCD to update
-				if(checkExist == true){
+				if(checkExist){
 					//add message error
 					actionErrors.add("existError", new ActionMessage("error.update.existError"));
 					saveErrors(request, actionErrors);
 					//return to updateJ1JR.jsp
 					return mapping.findForward("upDate");
-				}else{
+				} else {
 					//add message
 					actionErrors.add("updateSuccess", new ActionMessage("message.update.successUpdate"));
 					saveErrors(request, actionErrors);

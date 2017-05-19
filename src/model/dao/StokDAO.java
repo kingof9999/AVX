@@ -52,6 +52,7 @@ public class StokDAO {
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
 		} finally {
+			//close all connect
 			rs.close();
 			stmt.close();
 			DBConnection.disConnect();
@@ -88,6 +89,7 @@ public class StokDAO {
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
 		} finally {
+			//close all connect
 			rs.close();	
 			stmt.close();
 			DBConnection.disConnect();
@@ -124,6 +126,7 @@ public class StokDAO {
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
 		} finally {
+			//close all connect
 			rs.close();
 			stmt.close();
 			DBConnection.disConnect();
@@ -149,16 +152,11 @@ public class StokDAO {
 		}
 		try {
 			//check exist in database
-			if(rs.next()){
-				//return true if have
-				return true;
-			}else{
-				//return false if not
-				return false;
-			}
+			return rs.next();
 		} catch (Exception e) {
 			throw new Exception("Error occur: "+e.getMessage());
 		} finally {
+			//close all connect
 			rs.close();
 			stmt.close();
 			DBConnection.disConnect();
@@ -178,6 +176,7 @@ public class StokDAO {
 			throw new Exception("Error occur: "+e.getMessage());
 		}
 		finally {
+			//close all connect
 			stmt.close();
 			DBConnection.disConnect();
 		}
